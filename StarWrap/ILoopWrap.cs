@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
 
-    interface ILoopMan
+    interface ILoopWrap
     {
-        void SetDrawMan(DrawMan _drawMan);
+        void SetDrawWrap(DrawWrap _drawMan);
         void SetDrawLoop(Action _drawLoop);
         void SetLogicLoop(Func<bool> _logicLoop);
         void StartLoop();

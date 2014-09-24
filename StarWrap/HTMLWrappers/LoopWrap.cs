@@ -4,9 +4,9 @@ using System.Text;
 
 using System.Html;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class LoopMan : ILoopMan
+    class LoopWrap : ILoopWrap
     {
 
         Action drawLoop;
@@ -19,7 +19,7 @@ namespace StarWrap.Managers
             Window.RequestAnimationFrame(HTMLDrawLoop);
         }
 
-        public void SetDrawMan(DrawMan _drawMan)
+        public void SetDrawWrap(DrawWrap _drawWrap)
         {
 
         }

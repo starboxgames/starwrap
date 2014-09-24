@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    interface IDrawMan
+    interface IDrawWrap
     {
+        void AddImage(string name, string location);
+
         void LoadImages();
         void Display();
 

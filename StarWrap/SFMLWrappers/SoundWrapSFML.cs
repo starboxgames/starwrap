@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 using SFML.Audio;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class SoundMan : ISoundMan
+    class SoundWrap : ISoundWrap
     {
         public bool AllLoaded { get; set; }
         public bool LoadingFailed { get; set; }   
 
-        public SoundMan()
+        public SoundWrap()
         {
             for (int i = 0; i < sound.Count(); i++) sound[i] = new Sound();
 
@@ -35,19 +35,25 @@ namespace StarWrap.Managers
                 {
                     sound[i].SoundBuffer = s;
                     sound[i].Play();
+                    sound[i].Volume = 50;
                     break;
                 }
             }
         }
 
+        Dictionary<string, string> soundList = new Dictionary<string, string>();
+
+        public void AddSound(string name, string location)
+        {
+            soundList.Add(name, location);
+        }
+
         public void LoadSounds()
         {
-            SoundList soundList = new SoundList();
-
             AllLoaded = true;
             LoadingFailed = false;
 
-            foreach(KeyValuePair<string, string> sndname in soundList.Sounds)
+            foreach(KeyValuePair<string, string> sndname in soundList)
             {
                 try
                 {

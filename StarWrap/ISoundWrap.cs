@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    interface ISoundMan
+    interface ISoundWrap
     {
         bool AllLoaded { get; set; }
         bool LoadingFailed { get; set; }
+
+        void AddSound(string name, string location);
 
         void PlaySound(string name, bool music = false);
         void LoadSounds();

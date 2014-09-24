@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 using SFML.Window;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class ControlMan : IControlMan
+    class ControlWrap : IControlWrap
     {
         Dictionary<string, Keyboard.Key> controls = new Dictionary<string,Keyboard.Key>();
-
-        ControlList controlList = new ControlList();
 
         readonly Dictionary<string, Keyboard.Key> SFMLKeys = new Dictionary<string, Keyboard.Key>()
         {
@@ -112,12 +110,32 @@ namespace StarWrap.Managers
             { "key_F12", Keyboard.Key.F12 }
         };
 
-        public ControlMan()
+
+        public void AddButton(string name, string key)
         {
-            foreach(KeyValuePair<string, string> cntr in controlList.Controls)
+            controlList.Add(name, key);
+        }
+
+        public void ReplaceButton(string name, string key)
+        {
+            controlList[name] = key;
+        }
+
+        Dictionary<string, string> controlList = new Dictionary<string, string>();
+
+        public void ApplyControls()
+        {
+            controls.Clear();
+
+            foreach (KeyValuePair<string, string> cntr in controlList)
             {
                 controls.Add(cntr.Key, SFMLKeys[cntr.Value]);
             }
+        }
+
+        public ControlWrap()
+        {
+
         }
 
         public bool IsKeyPressed(string name)

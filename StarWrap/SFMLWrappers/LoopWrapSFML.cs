@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class LoopMan : ILoopMan
+    class LoopWrap : ILoopWrap
     {
         //delegate bool LogicLoop();
 
         Action drawLoop;
         Func<bool> logicLoop;
 
-        DrawMan drawMan;
+        DrawWrap drawMan;
 
-        public void SetDrawMan(DrawMan _drawMan)
+        public void SetDrawWrap(DrawWrap _drawMan)
         {
             drawMan = _drawMan;
         }

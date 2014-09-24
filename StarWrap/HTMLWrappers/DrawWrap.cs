@@ -6,9 +6,9 @@ using System.Html.Media.Graphics;
 
 using System.Runtime.CompilerServices;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class DrawMan : IDrawMan
+    class DrawWrap : IDrawWrap
     {
         Dictionary<string, ImageElement> images = new Dictionary<string,ImageElement>();
         
@@ -34,7 +34,7 @@ namespace StarWrap.Managers
         int width;
         int height;
 
-        public DrawMan()
+        public DrawWrap()
         {
             AllLoaded = false;
             LoadingFailed = false;
@@ -153,7 +153,7 @@ namespace StarWrap.Managers
             if (numImagesLoaded == numImages) AllLoaded = true;
         }
 
-        void AddImage(string name, string location)
+        void LoadImage(string name, string location)
         {
             ImageElement img;
 
@@ -165,16 +165,22 @@ namespace StarWrap.Managers
             images.Add(name, img);
         }
 
+        public void AddImage(string name, string location)
+        {
+            imageList.Add(name, location);
+        }
+
+        Dictionary<string, string> imageList = new Dictionary<string, string>();
+
         public void LoadImages()
         {
 
             numImages = -1;
 
-            ImageList imageList = new ImageList();
 
-            foreach(KeyValuePair<string,string> imgname in imageList.Images)
+            foreach(KeyValuePair<string,string> imgname in imageList)
             {
-                AddImage(imgname.Key, imgname.Value);
+                LoadImage(imgname.Key, imgname.Value);
             }
 
             numImages = images.Count;

@@ -4,13 +4,11 @@ using System.Text;
 using System.Html;
 
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class ControlMan : IControlMan
+    class ControlWrap : IControlWrap
     {
         bool[] keyPressed = new bool[255];
-
-        ControlList controlList = new ControlList();
 
         Dictionary<string, int> controls = new Dictionary<string, int>();
 
@@ -37,8 +35,30 @@ namespace StarWrap.Managers
             keyPressed[k.KeyCode] = false;
         }
 
+        public void AddButton(string name, string key)
+        {
+            controlList.Add(name, key);
+        }
+        
+        public void ReplaceButton(string name, string key)
+        {
+            controlList[name] = key;
+        }
 
-        public ControlMan()
+        Dictionary<string, string> controlList = new Dictionary<string, string>();
+
+        public void ApplyControls()
+        {
+            controls.Clear();
+
+            foreach (KeyValuePair<string, string> cntrl in controlList)
+            {
+
+                controls.Add(cntrl.Key, javaScriptKeys[cntrl.Value]);
+            }
+        }
+
+        public ControlWrap()
         {
             Document.OnKeydown += OnKeyDown;
             Document.OnKeyup += OnKeyUp;
@@ -138,11 +158,7 @@ namespace StarWrap.Managers
             javaScriptKeys.Add("key_F11", 122);
             javaScriptKeys.Add("key_F12", 123);
 
-            foreach(KeyValuePair<string,string> cntrl in controlList.Controls)
-            {
 
-                controls.Add(cntrl.Key, javaScriptKeys[cntrl.Value]);
-            }
 
         }
     }

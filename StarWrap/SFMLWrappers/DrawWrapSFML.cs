@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using SFML.Window;
 using SFML.Graphics;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class DrawMan : IDrawMan
+    class DrawWrap : IDrawWrap
     {
         RenderWindow window;
         RenderTexture buffer;
@@ -26,7 +26,7 @@ namespace StarWrap.Managers
             window.DispatchEvents();
         }
 
-        public DrawMan()
+        public DrawWrap()
         {
             Width = 640;
             Height = 360;
@@ -102,14 +102,19 @@ namespace StarWrap.Managers
 
         Dictionary<string, Texture> textures = new Dictionary<string,Texture>();
 
+        Dictionary<string, string> imageList = new Dictionary<string,string>();
+
+        public void AddImage(string name, string location)
+        {
+            imageList.Add(name, location);
+        }
+
         public void LoadImages()
         {
-            ImageList imageList = new ImageList();
-
             AllLoaded = true;
             LoadingFailed = false;
 
-            foreach(KeyValuePair<string,string> imgname in imageList.Images)
+            foreach(KeyValuePair<string,string> imgname in imageList)
             {
                 try
                 {

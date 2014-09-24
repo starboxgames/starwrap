@@ -5,16 +5,16 @@ using System.Html;
 
 using System.Runtime.CompilerServices;
 
-namespace StarWrap.Managers
+namespace StarWrap.Wrappers
 {
-    class SoundMan : ISoundMan
+    class SoundWrap : ISoundWrap
     {
         Dictionary<string,AudioElement> sounds = new Dictionary<string,AudioElement>();
 
         public bool AllLoaded { get; set; }
         public bool LoadingFailed { get; set; }
 
-        public SoundMan()
+        public SoundWrap()
         {
             AllLoaded = false;
             LoadingFailed = false;
@@ -42,7 +42,7 @@ namespace StarWrap.Managers
         }
 
 
-        void AddSound(string name, string location)
+        void LoadSound(string name, string location)
         {
             AudioElement audio = (AudioElement)Document.CreateElement("audio");
 
@@ -55,7 +55,7 @@ namespace StarWrap.Managers
 
             audio.Load();
 
-            audio.Volume = 0.1;
+            audio.Volume = 0.5;
 
             sounds.Add(name, audio);
         }
@@ -74,15 +74,21 @@ namespace StarWrap.Managers
             
         }
 
+        Dictionary<string, string> soundList = new Dictionary<string, string>();
+
+        public void AddSound(string name, string location)
+        {
+            soundList.Add(name, location);
+        }
+
         public void LoadSounds()
         {
             NumSounds = -1;
 
-            SoundList soundList = new SoundList();
 
-            foreach(KeyValuePair<string, string> sndname in soundList.Sounds)
+            foreach(KeyValuePair<string, string> sndname in soundList)
             {
-                AddSound(sndname.Key, sndname.Value);
+                LoadSound(sndname.Key, sndname.Value);
             }
 
             NumSounds = sounds.Count;
